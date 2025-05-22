@@ -1,0 +1,64 @@
+SELECT CAN SORT AND/OR RETURN TOP 10
+
+select * from taxonomy 
+limit 10;
+
+select * from taxonomy
+order by scientific_name;
+
+select * from taxonomy
+order by tax_id desc
+limit 10;
+
+
+
+
+
+SELECT CAN COMBINE ('JOIN') MULTIPLE TABLES -- USE WHERE THE CONDITION TO MATCH ROWS FROM EACH TABLE AND 'LINK' CORRESPONSING ROWS
+
+select * from taxonomy, name 
+where 
+    taxonomy.rank = 'species'
+  and
+    name.name_class = 'misspelling'
+  and
+    name.tax_id = taxonomy.tax_id
+
+
+
+
+
+SELECT CAN COUNT AND DO STRING MATCHING
+
+select count(*) from taxonomy 
+where scientific_name like 'D%';
+
+
+
+
+
+'CREATE' SQL COMMAND TO CREATE TABLES
+
+CREATE TABLE taxonomy (
+    tax_id INTEGER PRIMARY KEY,
+    scientific_name TEXT,
+    rank TEXT,
+    parent_id INT
+);
+CREATE TABLE name (
+    id INTEGER PRIMARY KEY,
+    tax_id INT,
+    name TEXT,
+    name_class TEXT
+);
+
+
+
+
+
+POPULATING DATABASES
+
+INSERT INTO name (tax_id,name,name_class) VALUES (9606,'H. sapiens','synonym');
+
+SELECT * from name where tax_id = 9606;
+
